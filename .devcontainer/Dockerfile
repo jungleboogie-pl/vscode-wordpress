@@ -196,3 +196,5 @@ RUN set -eux ; \
   find /tmp -type d -exec chmod -v 1777 {} +
 
 RUN mkdir /workspace &&  echo 'Wordpress does not like mounted volumes so you should colon the repo here' > WHERE-IS-MY-CODE.md && chown vscode:vscode /workspace
+
+RUN echo path: /var/www/html >> /wp-cli.yml
