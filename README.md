@@ -7,6 +7,9 @@ It extends the `wordpress` docker image with, `xdebug`, `wpcli`, `composer`, `my
 and most common sense linux utils like `curl`, `zsh`, `bash`, `ssh`, `ag`, ...  
 It is tested on MacOS M1 and avoid common performance issues that you will run in to using the vanilla `wordpress` docker image.
 
+![screen shot](screen.png "Screen shot of debugger in use")
+
+
 ## Usage
 
 The way vary depending on the structure of your repository and it contents. 
