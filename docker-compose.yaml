@@ -14,8 +14,6 @@ services:
       WORDPRESS_DEBUG: "true"
     depends_on:
       - db
-    links:
-      - db
       
   db:
     image: mariadb:latest

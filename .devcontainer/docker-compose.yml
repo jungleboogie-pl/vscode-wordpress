@@ -12,7 +12,12 @@ services:
       - .:/workspace
       # Uncomment the next line to use Docker from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker-compose for details.
       - /var/run/docker.sock:/var/run/docker.sock 
-    
+
+    # Trick needed for codespace to make the mysql appear on localhost in the devcontainer
+    environment:
+      WORDPRESS_DB_HOST: "localhost"
+    network_mode: service:db
+
     # for strace
     cap_add:
       - SYS_PTRACE
