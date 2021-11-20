@@ -1,8 +1,5 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.194.3/containers/docker-existing-docker-compose
-// If you want to run as a non-root user in the container, see .devcontainer/docker-compose.yml.
 {
-	"name": "Woo based on docker-compose",
+	"name": "WP/Woo based on docker-compose",
 
 	// The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.
 	"dockerComposeFile": [
@@ -14,15 +11,28 @@
 	"workspaceFolder": "/workspace",
 
 	// Set *default* container specific settings.json values on container create.
-	"settings": {},
-
+	"settings": { 
+		"sqltools.connections": [{
+			"name": "Container database",
+			"driver": "MySQL",
+			"previewLimit": 50,
+			"server": "db", // for codespaces this should be probably localhost
+			"port": 3306,
+			"database": "wordpress",
+			"username": "root",
+			"password": "changeme"
+		}]
+	},
+	
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"felixfbecker.php-intellisense",
 		"waderyan.gitblame",
 		"ms-azuretools.vscode-docker",
 		"felixfbecker.php-debug",
-		"felixfbecker.php-pack"
+		"felixfbecker.php-pack",
+		"mtxr.sqltools",
+		"mtxr.sqltools-driver-mysql"
 	],
 	
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
