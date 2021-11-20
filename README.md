@@ -1,15 +1,29 @@
 # vscode-wordpress
 Devcontainer scripts to develop Wordpress extensions or sites using VSCode remote containers, with battery includes.
 
+It should work on codespaces too.
+
 It extends the `wordpress` docker image with, `xdebug`, `wpcli`, `composer`, `mysql`, `node`, 
 and most common sense linux utils like `curl`, `zsh`, `bash`, `ssh`, `ag`, ...  
 It is tested on MacOS M1 and avoid common performance issues that you will run in to using the vanilla `wordpress` docker image.
 
-## How to use this container to develop wordpress extensions or sites
+## Usage
 
 The way vary depending on the structure of your repository and it contents. 
 Below you will find the most common examples, you can copy the relevant line to
 `.devcontainer/devcontainer.json` to `postStartCommand`.
+
+## How to access the wordpress code
+The wordpress code is located in /var/www/html. If you want to easily access it. You can make a link in your worksace as follows:
+```
+ln -s /var/www/html /workspace/html
+```
+Or add the folder to your workspace. The only drawnback I've notices is that the command `reopen in local folder` will stop working.
+```
+code -a /var/www/html
+```
+
+
 
 ## Plugin or Theme development
 If your repository contains a plugin source you can run (change the `my-plugin` to something that works for you)
