@@ -93,3 +93,8 @@ wp search-replace --regex 'http://localhost:[0-9]*' 'http://localhost:8080' --re
 ```
 
 Change the :8080 to your port.
+
+# Thanks
+
+I've based intial docker compose on this repo:
+https://github.com/nezhar/wordpress-docker-compose/issues/76
