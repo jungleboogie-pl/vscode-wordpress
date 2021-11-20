@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  wp:
+    image: wordpress:${WP_VER}  
+    volumes:
+      - www_html:/var/www/html
+      - db_exchange:/db_exchange
+    environment:
+      WORDPRESS_DB_HOST: "db"
+      WORDPRESS_DB_NAME: "${DB_NAME}"
+      WORDPRESS_DB_USER: "root"
+      WORDPRESS_DB_PASSWORD: "${DB_ROOT_PASSWORD}"
+      WORDPRESS_DEBUG: "true"
+    depends_on:
+      - db
+    links:
+      - db
+      
+  db:
+    image: mariadb:latest
+    command: [
+        '--default_authentication_plugin=mysql_native_password',
+        '--max_allowed_packet=256M', 
+        '--character-set-server=utf8mb4', 
+        '--collation-server=utf8mb4_unicode_520_ci'
+        ]
+    volumes:
+      - db_exchange:/db_exchange
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: "${DB_NAME}"
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+      
+volumes:
+  db_exchange:
+  www_html:
+  db_data:

@@ -1,0 +1,5 @@
+.DS_Store
+# archives used sometimes to transfer content between host and docker - it is 10x faster this way
+*.tar.gz
+*.tgz
+*.gz
