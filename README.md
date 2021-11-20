@@ -68,3 +68,25 @@ The access to a bind mounted workspace folder on MacOs is 10x solwer than access
 This makes serving wordpress directly from such mounted volume an impossibly slow (10sec to load a homepage).
 The old options to solve this issue like :cached or :delegated are gone with the gRPC-FUSE driver see https://github.com/docker/for-mac/issues/5402
 
+
+
+### Workaround on for everchanging ports
+The vscode option to forward ports picks a random unused port when fowarding containers ports.
+This is quite good idea as it let you have mutliple instances runinng in parallel and it is the only way to forward ports in codespaces.
+However this breaks wordpress as it will remember the first used port and try to redirect user to that port each time the 
+request comes from a different url.
+
+The way to fix this is to add a dynamic WP_HOME and WP_SITEURL as follows:
+```php
+$host = 'http://'.$_SERVER['HTTP_HOST'].'/';
+define( 'WP_HOME',  $host); 
+define( 'WP_SITEURL', $host);
+```
+It is done by default in this repository in the .devcontainer/docker-compose.yml
+
+If you worreid that the links are still being preserved in the database and some plugins may not respect WP_HOME and WP_SITEURL settings run the wpcli replace command as follows:
+```sh
+wp search-replace --regex 'http://localhost:[0-9]*' 'http://localhost:8080' --regex
+```
+
+Change the :8080 to your port.
