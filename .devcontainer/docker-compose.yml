@@ -18,10 +18,12 @@ services:
        WORDPRESS_DB_HOST: "127.0.0.1"
        # to ensure that wp can be accessed from any url
        WORDPRESS_CONFIG_EXTRA: | 
-          $$host = 'http://'.$$_SERVER['HTTP_HOST'].'/';
-          define( 'WP_HOME',  $$host); 
-          define( 'WP_SITEURL', $$host);
-
+          $$_host = $$_SERVER['HTTP_X_FORWARDED_HOST'] ?? $$_SERVER['HTTP_HOST']; 
+          $$_proto = $$_SERVER['HTTP_X_FORWARDED_PROTO'] ?? 'http'; 
+          $$_url = $$_proto.'://'.$$_host.'/'; 
+          define( 'WP_HOME', $$_url); 
+          define( 'WP_SITEURL', $$_url);
+          
     network_mode: service:db
 
     # for strace
