@@ -95,7 +95,8 @@ wp search-replace --regex 'https?://localhost:?[0-9]*' "$WP_URL"
 
 This changes any prot to :8080.
 
-# Thanks
+# How to run cron
+The default wp cron may fail on code spaces, if you needs your cron actions to fire you can run the following command:
+```wp cron event run --due-now  --quiet```
+It will execute all actions that in the queue. Bare in mind however that if it is run in a loop it may interfere with the debugging  capabilities of vscode. As wpcli will connect to your XDebug as any other php process. 
 
-I've based inital docker compose on this repo:
-https://github.com/nezhar/wordpress-docker-compose/issues/76
