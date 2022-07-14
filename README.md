@@ -94,9 +94,15 @@ wp search-replace --regex 'https?://localhost:?[0-9]*' "$WP_URL"
 ```
 
 This changes any prot to :8080.
-
-# How to run cron
+# Codespaces considerations
+WordPress is having hard time running behind codespaces revers proxy. It partially breaks cron and rest api. But we have a workarounds for both of the issues:
+## How to run cron
 The default wp cron may fail on code spaces, if you needs your cron actions to fire you can run the following command:
 ```wp cron event run --due-now  --quiet```
 It will execute all actions that in the queue. Bare in mind however that if it is run in a loop it may interfere with the debugging  capabilities of vscode. As wpcli will connect to your XDebug as any other php process. 
+
+## How to fix the rest api
+WordPress needs to run internal request from time to time. It does so using the external codespace domain that needs athentication. To fix this issue we need to set this external domain to point to localhost.
+This is done automatically by `.devcontainer/bin/fix-hosts.sh` as soon as the domain appears in HOME option. 
+If you this won't work for some reason you can safely run `bash .devcontainer/bin/fix-hosts.sh` again to set the proper value.
 

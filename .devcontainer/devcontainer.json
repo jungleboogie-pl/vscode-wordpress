@@ -46,8 +46,7 @@
 	
 	"postCreateCommand": "sudo chown -R vscode:vscode .",
 
-	// Add here links to /var/www/html
-	"postStartCommand": "sudo chown vscode:vscode /var/run/docker.sock",
+	"postStartCommand": ".devcontainer/bin/post-start.sh",
 
 	// Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode",
