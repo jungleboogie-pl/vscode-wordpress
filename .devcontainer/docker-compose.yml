@@ -19,6 +19,7 @@ services:
        # to ensure that wp can be accessed from any url
        WORDPRESS_CONFIG_EXTRA: | 
           $$_host = $$_SERVER['HTTP_X_FORWARDED_HOST'] ?? $$_SERVER['HTTP_HOST']; 
+          $$_SERVER['HTTP_HOST'] = $$_host;
           $$_proto = $$_SERVER['HTTP_X_FORWARDED_PROTO'] ?? 'http'; 
           $$_url = $$_proto.'://'.$$_host.'/'; 
           define( 'WP_HOME', $$_url); 
