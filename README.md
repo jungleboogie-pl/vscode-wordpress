@@ -89,7 +89,8 @@ I've added it for you in the .devcontainer/docker-compose.yml
 
 If you worreid that the links are still being preserved in the database and some plugins may not respect WP_HOME and WP_SITEURL settings run the wpcli replace command as follows:
 ```sh
-wp search-replace --regex 'http://localhost:[0-9]*' 'http://localhost:8080' --regex
+WP_URL='whaterver server you see in the browser address bar, eg. http://localhost:8080' 
+wp search-replace --regex 'https?://localhost:?[0-9]*' "$WP_URL" 
 ```
 
 This changes any prot to :8080.
